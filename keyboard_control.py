@@ -4,6 +4,7 @@ import pyautogui
 import time
 import math
 import os
+import time
 
 # Initialize Mediapipe Hand Detector
 mp_hands = mp.solutions.hands
@@ -11,7 +12,7 @@ hands = mp_hands.Hands(max_num_hands=1, min_detection_confidence=0.7)
 mp_draw = mp.solutions.drawing_utils
 
 # Initialize Webcam
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 
 # Cooldown tracker
 last_gesture = None
@@ -60,7 +61,7 @@ while True:
             elif wrist[1] - index_tip[1] > 120:
                 gesture = "UP"
 
-            # DOWN (fist / roll)
+            # DOWN (fist)
             elif abs(index_tip[1] - wrist[1]) < 40 and abs(index_tip[0] - thumb_tip[0]) < 40:
                 gesture = "DOWN"
 
@@ -75,19 +76,24 @@ while True:
 
                 if gesture == "LEFT":
                     pyautogui.press("left")
+                    # time.sleep(1)
 
                 elif gesture == "RIGHT":
                     pyautogui.press("right")
+                    # time.sleep(1)
 
                 elif gesture == "UP":
                     pyautogui.press("up")
+                    # time.sleep(1)
 
                 elif gesture == "DOWN":
                     pyautogui.press("down")
+                    # time.sleep(1)
 
                 elif gesture == "PINCH":
                     # OPTION 1: Press Enter
                     pyautogui.press("enter")
+                    # time.sleep(1)
 
                     # OPTION 2: Open file directly (uncomment if needed)
                     # os.startfile(FILE_PATH)
